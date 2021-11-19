@@ -3,13 +3,17 @@ package com.example.composeapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.example.composeapp.ui.theme.ComposeAppTheme
 import com.example.composeapp.ui.theme.Typography
 import java.time.format.TextStyle
@@ -38,20 +42,48 @@ fun Greeting(name: String) {
 
 @Composable
 fun CustomText(name: String) {
-    Text(
-        text = name,
-        style = Typography.h5,
-        color = Color.Cyan
-    )
+    Surface(modifier = Modifier
+        .fillMaxWidth()
+        .height(200.dp),
+    color = MaterialTheme.colors.secondary,
+    elevation = 5.dp
+    ) {
+        Text(
+            text = name,
+            style = Typography.h5,
+            color = Color.Black
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     ComposeAppTheme {
-        Column {
-            Greeting("Android")
+        Column(modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween) {
+            //Greeting("Android")
             CustomText(name = "Hamid O.")
+            Surface(modifier = Modifier
+                .width(200.dp)
+                .weight(2f),
+            color = MaterialTheme.colors.primary) {
+
+            }
+
+            Surface(modifier = Modifier
+                .width(200.dp)
+                .weight(3f),
+                color = MaterialTheme.colors.primaryVariant) {
+
+            }
+        }
+        Row(modifier = Modifier.fillMaxSize(),
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.End) {
+            Greeting(name = "This is a Row")
+            CustomText(name = "Using rows explicitly")
         }
     }
 }
