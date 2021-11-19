@@ -3,6 +3,7 @@ package com.example.composeapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -26,7 +27,6 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     Column {
-                        Greeting("Android")
                         CustomText(name = "Hamid O.")
                     }
                 }
@@ -36,8 +36,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Greeting() {
+    Box(modifier = Modifier.fillMaxSize(),
+    contentAlignment = Alignment.TopCenter) {
+        Box(modifier = Modifier.background(Color.Green).width(100.dp).height(100.dp),
+        contentAlignment = Alignment.Center){
+            Text(text = "This is a Box")
+            Box(modifier = Modifier
+                .background(Color.Yellow)
+                .height(50.dp)
+                .width(50.dp))
+        }
+
+    }
 }
 
 @Composable
@@ -55,35 +66,44 @@ fun CustomText(name: String) {
         )
     }
 }
+@Composable
+fun CustomTemplate() {
+    Column(modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween) {
+        CustomText(name = "Hamid O.")
+        Surface(
+            modifier = Modifier
+                .width(200.dp)
+                .weight(2f),
+            color = MaterialTheme.colors.primary
+        ) {
+
+        }
+
+        Surface(
+            modifier = Modifier
+                .width(200.dp)
+                .weight(3f),
+            color = MaterialTheme.colors.primaryVariant
+        ) {
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.End
+        ) {
+            CustomText(name = "Using rows explicitly")
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     ComposeAppTheme {
-        Column(modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween) {
-            //Greeting("Android")
-            CustomText(name = "Hamid O.")
-            Surface(modifier = Modifier
-                .width(200.dp)
-                .weight(2f),
-            color = MaterialTheme.colors.primary) {
-
-            }
-
-            Surface(modifier = Modifier
-                .width(200.dp)
-                .weight(3f),
-                color = MaterialTheme.colors.primaryVariant) {
-
-            }
-        }
-        Row(modifier = Modifier.fillMaxSize(),
-        verticalAlignment = Alignment.Bottom,
-        horizontalArrangement = Arrangement.End) {
-            Greeting(name = "This is a Row")
-            CustomText(name = "Using rows explicitly")
+        Column(modifier = Modifier.fillMaxSize()) {
+            Greeting()
         }
     }
 }
