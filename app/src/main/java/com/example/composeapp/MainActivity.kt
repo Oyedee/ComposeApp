@@ -14,6 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -61,19 +64,18 @@ fun Greeting() {
 
 @Composable
 fun CustomText(name: String) {
-    Surface(
+    Text(
+        text = name,
         modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp),
-        color = MaterialTheme.colors.secondary,
-        elevation = 5.dp
-    ) {
-        Text(
-            text = name,
-            style = Typography.h5,
-            color = Color.Black
-        )
-    }
+            .background(MaterialTheme.colors.primary)
+            .padding(10.dp)
+            .width(200.dp),
+        color = Color.Magenta,
+        fontSize = 30.sp,
+        fontStyle = FontStyle.Italic,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center
+    )
 }
 
 @Composable
@@ -115,7 +117,7 @@ fun CustomTemplate() {
 fun DefaultPreview() {
     ComposeAppTheme {
         Column(modifier = Modifier.fillMaxSize()) {
-            Greeting()
+            CustomText(name = "Compose Text")
         }
     }
 }
