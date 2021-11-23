@@ -14,9 +14,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -79,6 +85,29 @@ fun CustomText(name: String) {
 }
 
 @Composable
+fun CustomText2() {
+    Text(
+        buildAnnotatedString {
+            withStyle(ParagraphStyle(textAlign = TextAlign.Center)){
+                withStyle(style = SpanStyle(
+                    color = Color.Red, fontSize = 100.sp, shadow = Shadow(color = Color.Gray),
+                    fontWeight = FontWeight.ExtraBold
+                )){
+                    append("H")
+                }
+                append("A")
+                append("M")
+                append("I")
+                append("D")
+            }
+        },
+    fontSize = 30.sp,
+    modifier = Modifier.width(200.dp).background(color = Color.Cyan).padding(16.dp),
+    fontFamily = FontFamily.SansSerif
+    )
+}
+
+@Composable
 fun CustomTemplate() {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -118,6 +147,7 @@ fun DefaultPreview() {
     ComposeAppTheme {
         Column(modifier = Modifier.fillMaxSize()) {
             CustomText(name = "Compose Text")
+            CustomText2()
         }
     }
 }
